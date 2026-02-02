@@ -13,7 +13,7 @@ class ImageListRepositoryImpl(
         limit: Int
     ): ImageListModel {
         val response: ImageListModel = networkClient.get(
-            url = "https://picsum.photos/v2/list",
+            url = "https://picsum.photos/v2/list" + "?page=$page&limit=$limit",
             responseType = ImageListModel::class
         )
 
