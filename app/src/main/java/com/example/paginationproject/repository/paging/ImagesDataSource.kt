@@ -1,5 +1,6 @@
 package com.example.paginationproject.repository.paging
 
+import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.paginationproject.network.imageResponse.ImageListModel
@@ -11,15 +12,17 @@ class ImagesDataSource(
 ): PagingSource<Int, ImageListModelItem>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ImageListModelItem> {
+        Log.d("Paging", "load called, key=${params.key}")
         return try {
             val page = params.key ?: 1
-            val response = repository.getImages(page, params.loadSize)
+            val response = repository.getImages(page, 10)//params.loadSize)
             LoadResult.Page(
                 data = response,
                 prevKey = if (page == 1) null else page - 1,
                 nextKey = if (response.isEmpty()) null else page + 1
             )
         }catch (e: Exception){
+            Log.d("Paging", "load called, =${e.toString()}")
             return LoadResult.Error(e)
         }
     }

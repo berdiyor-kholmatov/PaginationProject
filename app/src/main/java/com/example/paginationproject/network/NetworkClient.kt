@@ -1,5 +1,6 @@
 package com.example.paginationproject.network
 
+import com.example.paginationproject.network.imageResponse.ImageListModel
 import java.io.Closeable
 import kotlin.reflect.KClass
 
@@ -9,4 +10,9 @@ interface NetworkClient : Closeable  {
         headers: Map<String, String> = emptyMap(),
         responseType: KClass<T>
     ) : T
+
+    suspend fun get(
+        url: String,
+        headers: Map<String, String> = emptyMap(),
+    ) : ImageListModel
 }

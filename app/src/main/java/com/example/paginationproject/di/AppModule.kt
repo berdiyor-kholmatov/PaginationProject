@@ -2,6 +2,8 @@ package com.example.paginationproject.di
 
 import com.example.paginationproject.network.NetworkClient
 import com.example.paginationproject.network.client.NetworkClientImpl
+import com.example.paginationproject.repository.ImageListRepository
+import com.example.paginationproject.repository.ImageListRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -38,6 +40,13 @@ object AppModule {
         return realNetworkClient
     }
 
+    //for future testing
+    @Provides
+    fun provideImageListRepository(
+        imageListRepositoryImpl: ImageListRepositoryImpl
+    ): ImageListRepository {
+        return imageListRepositoryImpl
+    }
 
 
 }
