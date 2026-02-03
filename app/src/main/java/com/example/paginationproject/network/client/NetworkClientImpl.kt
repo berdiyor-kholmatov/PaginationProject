@@ -2,6 +2,7 @@ package com.example.paginationproject.network.client
 
 import com.example.paginationproject.network.NetworkClient
 import com.example.paginationproject.network.imageResponse.ImageListModel
+import com.example.paginationproject.network.imageResponse.ImageListModelItem
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
@@ -34,7 +35,7 @@ class NetworkClientImpl @Inject constructor(
     override suspend fun get(
         url: String,
         headers: Map<String, String>
-    ): ImageListModel {
+    ): List<ImageListModelItem> {
         val response: HttpResponse = httpClient.get(url)
         {
             headers.forEach { (key, value) -> header(key, value) }

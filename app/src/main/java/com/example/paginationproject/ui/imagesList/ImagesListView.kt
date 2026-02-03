@@ -1,11 +1,13 @@
 package com.example.paginationproject.ui.imagesList
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -37,10 +39,12 @@ fun ImagesList(viewModel: ImageListViewModel){
             .background(Color.Red)
         ,
     ){
+        Log.d("test", "executed in LazyColumn: ${imagesList.itemCount}")
+//        Log.d("test", "executed in LazyColumn: ${imagesList[0]}")
+
+
         items(
-            imagesList.itemCount,
-            key = imagesList.itemKey {it.id},
-            contentType = imagesList.itemContentType { "image" }
+            imagesList!!.itemCount,
         ){ index: Int ->
             val item = imagesList[index]
             if (item != null) {
