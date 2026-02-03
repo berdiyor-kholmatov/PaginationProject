@@ -2,17 +2,20 @@ package com.example.paginationproject.ui.imagesList
 
 import android.util.Log
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemContentType
 import androidx.paging.compose.itemKey
@@ -34,30 +37,48 @@ fun ImagesList(viewModel: ImageListViewModel){
 
     val imagesList = viewModel.usersPager.collectAsLazyPagingItems()
 
-    LazyColumn(
-        modifier = Modifier.systemBarsPadding().fillMaxSize()
-            .background(Color.Red)
-        ,
-    ){
-        Log.d("test", "executed in LazyColumn: ${imagesList.itemCount}")
+        LazyColumn(
+            modifier = Modifier.fillMaxSize()
+                .background(Color.Red)
+            ,
+        ){
+            Log.d("test", "executed in LazyColumn: ${imagesList.itemCount}")
 //        Log.d("test", "executed in LazyColumn: ${imagesList[0]}")
 
+//            items(10){ item ->
+//                Box{
+//                    AsyncImage(
+//                            model = "https://picsum.photos/id/10/2500/1667",
+//                            contentDescription = "item.author",
+//                            modifier = Modifier
+//                                .fillMaxWidth()
+//                                .height(230.dp),
+//                            contentScale = ContentScale.Crop
+//                        )
+//                }
+//
+//            }
 
-        items(
-            imagesList!!.itemCount,
-        ){ index: Int ->
-            val item = imagesList[index]
-            if (item != null) {
-                AsyncImage(
-                    model = item.url,
-                    contentDescription = item.author,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(230.dp),
-                    contentScale = ContentScale.Crop
-                )
+
+            items(
+                imagesList.itemCount,
+            ){ index: Int ->
+                Log.d("test2", "executed in LazyColumn: ${index}")
+                val item = imagesList[index]
+                Log.d("test2", "executed in LazyColumn: ${item}")
+                if (item != null) {
+                    AsyncImage(
+                        model = item.download_url,
+                        contentDescription = item.author,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(230.dp),
+                        contentScale = ContentScale.Crop
+                    )
+                }
             }
         }
-    }
+
+
 
 }

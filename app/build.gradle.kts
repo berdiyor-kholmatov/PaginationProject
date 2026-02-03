@@ -66,6 +66,8 @@ dependencies {
     implementation(libs.androidx.paging.compose)
     implementation(libs.androidx.paging.runtime)
 
+
+
     // ktor
     implementation(libs.ktor.client.core)
     implementation(libs.ktor.client.okhttp)
